@@ -2,3 +2,4 @@ App/
 codeql/
 codeql-repo/
 databases/
+.gitignore

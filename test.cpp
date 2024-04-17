@@ -9,6 +9,12 @@ public:
     FileAnalyzer(const std::string& extension) : extension_(extension) {}
 
     void analyze(const std::string& filePath) {
+        
+        if(filePath.find("App/"+extension_) == std::string::npos ){
+            std::cout << "The file path must start with App/extension." << std::endl;
+            exit(0);
+        }
+
         std::cout << "Start " << extension_ << " File Analysis" << std::endl;
         std::cout << "Analyzing file at path: " << filePath << std::endl;
 
@@ -44,6 +50,8 @@ private:
         std::cout << "Creating database..." << std::endl;        
         std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
         std::cout << command << std::endl;
+        std::system(command.c_str());
+        
         
     }
 
@@ -52,6 +60,7 @@ private:
         std::cout << "Creating database..." << std::endl;
         std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
         std::cout << command << std::endl;
+        std::system(command.c_str());
         
     }
 
@@ -60,6 +69,7 @@ private:
         std::cout << "Creating database..." << std::endl;
         std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
         std::cout << command << std::endl;
+        std::system(command.c_str());
         
     } 
 };

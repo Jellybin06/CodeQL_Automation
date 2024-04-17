@@ -12,6 +12,8 @@ mkdir App
 cd App
 mkdir c++ python c
 
-
+CODEQL_PATH="/root/fileguard/Static/codeql"
+echo 'export PATH="$PATH: '"$CODEQL_PATH"'"' >> ~/.bashrc
+source ~/.bashrc
 
 
