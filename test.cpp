@@ -51,6 +51,10 @@ private:
         std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
         std::cout << command << std::endl;
         std::system(command.c_str());
+        if (execl("/bin/sh", "sh", "./analyze_c++.sh", timeStr, NULL) == -1) {
+            std::cerr << "Error occurred while executing the shell script." << std::endl;
+            exit(0);
+        }
         
         
     }
