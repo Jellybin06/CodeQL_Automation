@@ -51,18 +51,14 @@ private:
         std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
         std::cout << command << std::endl;
         std::system(command.c_str());
-        if (execl("/bin/sh", "sh", "./analyze_c++.sh", timeStr, NULL) == -1) {
-            std::cerr << "Error occurred while executing the shell script." << std::endl;
-            exit(0);
-        }
-        
         
     }
 
     void analysisCppFile(const std::string& path, const std::string& timeStr) {
+        std::string xmlFile = "resultFile/"+timeStr;
         std::cout << "Analyzing C++ file: " << path << std::endl;
         std::cout << "Creating database..." << std::endl;
-        std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path;
+        std::string command = "codeql database create databases/"+timeStr+" --language=cpp --source-root=" + path + " && ./analyze_c++.sh " + timeStr + " " + xmlFile;
         std::cout << command << std::endl;
         std::system(command.c_str());
         
@@ -82,7 +78,7 @@ private:
 int main() {
     std::string want, language;
     std::cout << "What would you like to do? " << std::endl; 
-    std::cout << "CodeQL_Install (1) & CodeQL_Analysis (2) & exit (3) " << std::endl;
+    std::cout << "CodeQL_Install (1) & CodeQL_Analysis (2) & exit (3) : ";
     std::getline(std::cin, want);
 
     if (want == "CodeQL_Install" || want == "1") {
